@@ -3,7 +3,7 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import path from "path";
 import bodyParser from "body-parser";
 
-import { router as adminRouter, product as adminProduct } from "./routes/admin";
+import adminRoutes from "./routes/admin";
 import shopRountes from "./routes/shop";
 
 var viewPath = path.join(__dirname, 'views');
@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use("/admin", adminRouter);
+app.use("/admin", adminRoutes);
 app.use(shopRountes);
 
 // '/invalid url'
