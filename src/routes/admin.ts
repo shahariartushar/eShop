@@ -12,4 +12,4 @@ router.get("/add-product", productController.getAddPorduct);
 // '/admin/add-product' => POST
 router.post("/add-product", productController.postAddProduct);
 
-export = router;
+export default router;

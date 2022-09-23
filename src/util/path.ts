@@ -1,5 +1,4 @@
 import path from "path";
 
-
 // root directory
-//export = path.dirname(require.main.filename);
+//clearexport = path.dirname(require.main.filename);

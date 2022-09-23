@@ -1,13 +1,12 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 
-const products: any = [];
+import Product from "../models/product";
 
 const getAddPorduct: any = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  //res.sendFile(path.join(__dirname, "../" ,"views", "add-product.html"));
   res.render("add-product", {
     pageTitle: "Add Product",
     path: "admin/add-product",
@@ -22,14 +21,13 @@ const postAddProduct: any = (
   res: Response,
   next: NextFunction
 ) => {
-  products.push({ title: req.body.title });
+  const product = new Product(req.body.title);
+  product.save();
   res.redirect("/");
 };
 
-
-const getProducts : any = (req: Request, res: Response, next: NextFunction) => {
-    console.log(products);
-    //res.sendFile(path.join(__dirname, "../" ,"views", "shop.html"));
+const getProducts: any = (req: Request, res: Response, next: NextFunction) => {
+  const products = Product.fetchAll((products: any) => {
     res.render("shop", {
       prods: products,
       pageTitle: "Shop",
@@ -38,6 +36,7 @@ const getProducts : any = (req: Request, res: Response, next: NextFunction) => {
       activeShop: true,
       productCSS: true,
     });
-  }
+  });
+};
 
 export default { getAddPorduct, postAddProduct, getProducts };
